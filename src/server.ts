@@ -6,12 +6,8 @@ const app = fastify()
 
 app.get('/hello', async () => {
   const transactions = await knex('transactions')
-    .insert({
-      id: crypto.randomUUID(),
-      title: 'Transacao de teste',
-      amount: 10000,
-    })
-    .returning('*')
+    .where('amount', 10000)
+    .select('*')
 
   return transactions
 })
